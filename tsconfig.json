@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // Используем самый современный JavaScript
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true, // Включаем строгий режим для максимальной пользы
+    "isolatedModules": true, // Требование Vite
+    "noEmit": true // ВАЖНО: компиляцией занимается Vite, а не tsc
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+}

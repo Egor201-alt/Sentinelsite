@@ -1,0 +1,326 @@
+/* --- ФАЙЛ: news-style.css (САМОДОСТАТОЧНЫЙ) --- */
+
+/* --- ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+:root { --bg-color:#121212; --surface-color:#1E1E1E; --primary-color:#FCA311; --primary-hover:#FFB74D; --text-color:#E0E0E0; --text-muted:#a0a0a0; --danger-color:#D32F2F; --success-color:#4CAF50; --font-family:'Montserrat',sans-serif; --border-radius:12px; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background-color:var(--bg-color); color:var(--text-color); font-family:var(--font-family); min-height:100vh; }
+.page-wrapper { display:flex; flex-direction:column; height:100vh; }
+.dashboard-body { display:flex; flex-grow:1; overflow:hidden; }
+
+/* --- ШАПКА САЙТА --- */
+.site-header {
+    background-color: var(--surface-color);
+    padding: 20px 40px;
+    border-bottom: 1px solid #333;
+    box-shadow:0 4px 20px -5px rgba(252,163,17,0.1);
+    flex-shrink: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* 
+   УДАЛИТЬ СТАРЫЙ СТИЛЬ:
+   .site-title { font-size: 1.5rem; text-shadow: 0 0 8px rgba(252,163,17,0.4); } 
+*/
+
+/* ДОБАВИТЬ НОВЫЕ СТИЛИ ВМЕСТО .site-title */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-text, #f0f0f0); /* Используем переменную или запасной цвет */
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif; /* Важно добавить шрифт для консистентности */
+}
+
+.logo img {
+    height: 36px;
+    border-radius: 8px;
+}
+/* --- КОНЕЦ БЛОКА ДЛЯ ЗАМЕНЫ --- */
+
+
+.header-profile { display:flex; align-items:center; gap:10px; background-color:#2c2c2c; border:1px solid transparent; border-bottom:1px solid #333; border-radius:12px; padding:8px 10px 8px 12px; cursor:pointer; transition:background-color 0.2s ease }
+.header-profile:hover { background-color:#383838 }
+.header-profile img { width:34px; height:34px }
+.profile-name { font-weight:600; font-size:1.1rem; color:var(--text-color) }
+/* --- Стили для правых элементов шапки --- */
+
+/* Новая обертка для кнопок справа */
+.header-right-panel {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Расстояние между кнопкой уведомлений и профилем */
+}
+
+/* Стили для иконки-кнопки (уведомления) */
+.header-icon-btn {
+    background-color: #2c2c2c;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    width: 48px;  /* Делаем ее квадратной и по высоте как плитка профиля */
+    height: 48px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.header-icon-btn:hover {
+    background-color: #383838;
+    color: var(--text-color);
+    border-color: transparent;
+}
+
+/* Выпадающее меню профиля */
+.profile-dropdown { position:absolute; top:calc(100% - 10px); right:40px; width:260px; background-color:#252525; border:1px solid transparent; border-radius:var(--border-radius); box-shadow:0 10px 30px rgba(0,0,0,0.3); padding:12px; z-index:100; opacity:1; transform:translateY(0); transition:opacity 0.2s ease,transform 0.2s ease; pointer-events:auto }
+.profile-dropdown.hidden { opacity:0; transform:translateY(-10px); pointer-events:none }
+.dropdown-user-info { display:flex; align-items:center; gap:15px; padding:8px }
+.dropdown-user-info img { width:48px; height:48px }
+.user-info-name { font-size:1.1rem; font-weight:600; color:var(--text-color) }
+.dropdown-divider { border:none; border-top:1px solid #333; margin:10px 0 }
+.dropdown-menu { display:flex; flex-direction:column; gap:5px }
+.dropdown-item { display:flex; align-items:center; gap:15px; padding:12px; text-decoration:none; color:var(--text-muted); font-weight:500; border-radius:8px; transition:background-color 0.2s ease,color 0.2s ease }
+.dropdown-item:hover { background-color:#2c2c2c; color:var(--text-color) }
+.dropdown-item i { width:20px; font-size:1.1rem; text-align:center }
+.dropdown-item.danger-link:hover { background-color:rgba(211,47,47,0.1); color:var(--danger-color) }
+
+/* --- САЙДБАР --- */
+.sidebar { width: 250px; background-color: var(--surface-color); padding: 20px; flex-shrink: 0; border-right: 1px solid #333; overflow-y: auto; }
+.sidebar-nav { list-style: none; }
+.sidebar-nav a { display:flex; align-items:center; padding:12px 15px; margin-bottom:5px; color:var(--text-muted); text-decoration:none; border-radius:10px; transition:all 0.2s ease; font-weight:500; }
+.sidebar-nav a:hover { color:#fff; background-color:#2c2c2c; transform:translateX(5px); }
+.sidebar-nav a.active { font-weight:600; color:#fff; background:linear-gradient(90deg,rgba(252,163,17,0.1) 0,rgba(252,163,17,0) 100%); box-shadow:inset 3px 0 0 0 var(--primary-color); }
+.sidebar-nav a i { width: 20px; margin-right: 15px; font-size: 1.1rem; text-align: center; }
+.beta-badge {
+    background: linear-gradient(145deg, var(--primary-hover), var(--primary-color));
+    color: #1E1E1E; 
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 8px;
+    text-transform: uppercase;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 8px rgba(252, 163, 17, 0.4);
+    animation: pulse-glow 2.5s infinite ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 8px rgba(252, 163, 17, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 16px rgba(252, 163, 17, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 8px rgba(252, 163, 17, 0.4);
+    }
+}
+
+/* --- ОСНОВНОЙ МАКЕТ НОВОСТЕЙ --- */
+.main-content { padding: 25px; flex-grow: 1; overflow: hidden; display: flex; }
+.news-layout { display: grid; grid-template-columns: 1fr 280px; gap: 30px; width: 100%; height: 100%; overflow: hidden; }
+.news-feed-container { display: flex; flex-direction: column; gap: 20px; min-height: 0; }
+.new-post-box { display: flex; align-items: flex-start; gap: 15px; background-color: var(--surface-color); padding: 15px; border-radius: var(--border-radius); flex-shrink: 0; }
+.styled-input { width:100%; padding:14px 15px; background-color:#2c2c2c; border:1px solid #383838; border-radius:8px; color:var(--text-color); font-family:var(--font-family); font-size:1rem; resize: none; transition: all 0.2s ease; }
+.styled-input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 10px rgba(252, 163, 17, 0.3); }
+.send-btn { background-color: var(--primary-color); color: var(--bg-color); border: none; width: 48px; height: 48px; min-width: 48px; border-radius: 10px; font-size: 1.2rem; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; }
+.send-btn:hover { background-color: var(--primary-hover); transform: scale(1.05); }
+
+/* --- ЛЕНТА НОВОСТЕЙ --- */
+.news-feed { flex-grow: 1; overflow-y: auto; min-height: 0; padding-right: 10px; }
+.news-feed::-webkit-scrollbar { width: 6px; }
+.news-feed::-webkit-scrollbar-track { background: transparent; }
+.news-feed::-webkit-scrollbar-thumb { background-color: #444; border-radius: 10px; }
+.post-card { background-color: var(--surface-color); border-radius: var(--border-radius); padding: 20px; margin-bottom: 20px; border: 2px solid transparent; transition: border-color 0.3s ease; }
+.featured-post { border-color: var(--primary-color); box-shadow: 0 0 20px rgba(252, 163, 17, 0.2); }
+.post-header { display:flex; align-items:center; gap:12px; margin-bottom:15px; }
+.post-header img { width:40px; height:40px; image-rendering: pixelated; }
+.post-author-info { display:flex; flex-direction:column; }
+.post-author-name { font-size:1rem; font-weight:600; color:var(--text-color); display:flex; align-items:center; gap:8px; }
+.verified-icon { color: var(--primary-color); font-size: 0.9rem; }
+.post-meta { font-size:0.8rem; color:var(--text-muted); }
+.post-content h3 { font-size:1.2rem; margin-bottom:15px; }
+.post-content p { line-height:1.6; font-size:0.9rem; margin-bottom:10px; color: var(--text-muted); }
+.post-content strong { color: var(--text-color); font-weight: 600; }
+.post-link { color: var(--primary-color); text-decoration: none; font-weight: 600; display: inline-block; margin-top: 10px;}
+.post-link:hover { text-decoration: underline; }
+.post-image { width:100%; border-radius:8px; margin-top:20px; }
+.post-footer { margin-top:15px; padding-top:15px; border-top:1px solid #333; }
+.post-actions { display: flex; gap: 10px; }
+.post-action-btn {
+    background-color: #383838;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+.post-action-btn:hover {
+    background-color: #444;
+    color: var(--text-color);
+    border-color: #555;
+}
+.post-action-btn.like-btn:hover {
+    color: var(--success-color);
+    border-color: var(--success-color);
+    background-color: rgba(76, 175, 80, 0.1);
+}
+.post-action-btn.dislike-btn:hover {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+    background-color: rgba(211, 47, 47, 0.1);
+}
+
+
+/* --- ПАНЕЛЬ ФИЛЬТРОВ И РЕКЛАМЫ --- */
+.right-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.filters-panel {
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+}
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative; /* Для позиционирования выпадающего меню */
+}
+.filter-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
+.styled-select {
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.styled-select:hover { border-color: #555; }
+.filter-group.active .styled-select {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(252, 163, 17, 0.3);
+}
+.styled-select .selected-icon {
+    width: 20px;
+    text-align: center;
+    margin-right: 12px;
+    color: var(--text-muted);
+}
+.styled-select span {
+    flex-grow: 1;
+}
+.filter-group.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Стили для выпадающего меню */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #2c2c2c;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    margin-top: 5px;
+    list-style: none;
+    z-index: 10;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+.filter-group.active .dropdown-menu {
+    max-height: 200px;
+    opacity: 1;
+}
+.dropdown-menu li {
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.dropdown-menu li:hover {
+    background-color: #383838;
+}
+.dropdown-menu li i {
+    width: 20px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.contact-admin-btn {
+    background-color: #2c2c2c;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.contact-admin-btn:hover {
+    background-color: #383838;
+    color: var(--text-color);
+    border-color: #555;
+}
+
+/* --- РЕКЛАМНЫЙ ВИДЖЕТ --- */
+.ad-widget {
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.ad-content {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed #333;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-muted);
+    text-align: center;
+}
+.ad-content i {
+    font-size: 2.5rem;
+}
+.ad-content span {
+    font-weight: 500;
+}

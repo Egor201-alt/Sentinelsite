@@ -1,0 +1,675 @@
+/* --- Стили для главной страницы банка (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ) --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+:root {
+    --bg-color: #121212;
+    --surface-color: #1E1E1E;
+    --primary-color: #FCA311;
+    --primary-hover: #FFB74D;
+    --text-color: #E0E0E0;
+    --text-muted: #a0a0a0;
+    --danger-color: #D32F2F;
+    --danger-hover: #E57373;
+    --success-color: #4CAF50;
+    --success-hover: #66BB6A;
+    --font-family: 'Montserrat', sans-serif;
+    --border-radius: 12px;
+}
+
+/* --- Общие стили и структура --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); min-height: 100vh; }
+.page-wrapper { display: flex; flex-direction: column; height: 100vh; }
+.dashboard-body { display: flex; flex-grow: 1; overflow: hidden; }
+
+/* --- ШАПКА САЙТА --- */
+.site-header {
+    background-color: var(--surface-color);
+    padding: 20px 40px;
+    border-bottom: 1px solid #333;
+    box-shadow:0 4px 20px -5px rgba(252,163,17,0.1);
+    flex-shrink: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* 
+   УДАЛИТЬ СТАРЫЙ СТИЛЬ:
+   .site-title { font-size: 1.5rem; text-shadow: 0 0 8px rgba(252,163,17,0.4); } 
+*/
+
+/* ДОБАВИТЬ НОВЫЕ СТИЛИ ВМЕСТО .site-title */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-text, #f0f0f0); /* Используем переменную или запасной цвет */
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif; /* Важно добавить шрифт для консистентности */
+}
+
+.logo img {
+    height: 36px;
+    border-radius: 8px;
+}
+/* --- КОНЕЦ БЛОКА ДЛЯ ЗАМЕНЫ --- */
+
+
+.header-profile { display:flex; align-items:center; gap:10px; background-color:#2c2c2c; border:1px solid transparent; border-bottom:1px solid #333; border-radius:12px; padding:8px 10px 8px 12px; cursor:pointer; transition:background-color 0.2s ease }
+.header-profile:hover { background-color:#383838 }
+.header-profile img { width:34px; height:34px }
+.profile-name { font-weight:600; font-size:1.1rem; color:var(--text-color) }
+/* --- Стили для правых элементов шапки --- */
+
+/* Новая обертка для кнопок справа */
+.header-right-panel {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Расстояние между кнопкой уведомлений и профилем */
+}
+
+/* Стили для иконки-кнопки (уведомления) */
+.header-icon-btn {
+    background-color: #2c2c2c;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    width: 48px;  /* Делаем ее квадратной и по высоте как плитка профиля */
+    height: 48px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.header-icon-btn:hover {
+    background-color: #383838;
+    color: var(--text-color);
+    border-color: transparent;
+}
+
+/* Выпадающее меню профиля */
+.profile-dropdown { position:absolute; top:calc(100% - 10px); right:40px; width:260px; background-color:#252525; border:1px solid transparent; border-radius:var(--border-radius); box-shadow:0 10px 30px rgba(0,0,0,0.3); padding:12px; z-index:100; opacity:1; transform:translateY(0); transition:opacity 0.2s ease,transform 0.2s ease; pointer-events:auto }
+.profile-dropdown.hidden { opacity:0; transform:translateY(-10px); pointer-events:none }
+.dropdown-user-info { display:flex; align-items:center; gap:15px; padding:8px }
+.dropdown-user-info img { width:48px; height:48px }
+.user-info-name { font-size:1.1rem; font-weight:600; color:var(--text-color) }
+.dropdown-divider { border:none; border-top:1px solid #333; margin:10px 0 }
+.dropdown-menu { display:flex; flex-direction:column; gap:5px }
+.dropdown-item { display:flex; align-items:center; gap:15px; padding:12px; text-decoration:none; color:var(--text-muted); font-weight:500; border-radius:8px; transition:background-color 0.2s ease,color 0.2s ease }
+.dropdown-item:hover { background-color:#2c2c2c; color:var(--text-color) }
+.dropdown-item i { width:20px; font-size:1.1rem; text-align:center }
+.dropdown-item.danger-link:hover { background-color:rgba(211,47,47,0.1); color:var(--danger-color) }
+
+/* --- Сайдбар --- */
+.sidebar { width: 250px; background-color: var(--surface-color); padding: 20px; flex-shrink: 0; border-right: 1px solid #333; overflow-y: auto; }
+.sidebar-nav { list-style: none; }
+.sidebar-nav a { display:flex; align-items:center; padding:12px 15px; margin-bottom:5px; color:var(--text-muted); text-decoration:none; border-radius:10px; transition:background-color 0.2s ease,color 0.2s ease,transform 0.2s ease,box-shadow 0.2s ease; font-weight:500; position:relative }
+.sidebar-nav a:hover { color:#fff; background-color:#2c2c2c; transform:translateX(5px) }
+.sidebar-nav a.active { font-weight:600; color:#fff; background:linear-gradient(90deg,rgba(252,163,17,0.1) 0,rgba(252,163,17,0) 100%); box-shadow:inset 3px 0 0 0 var(--primary-color) }
+.sidebar-nav a i { width: 20px; margin-right: 15px; font-size: 1.1rem; text-align: center; }
+
+.main-content { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; }
+.container { width: 100%; max-width: 1900px; margin: 0 auto; display: flex; flex-direction: column; flex-grow: 1; }
+.content-panel { background-color:var(--surface-color); padding:0; border-radius:var(--border-radius); display:flex; flex-direction:column; flex-grow:1 }
+.page-header { display: flex; align-items: center; margin-bottom: 30px; padding: 25px 25px 0 25px; }
+.back-button { color: var(--text-muted); font-size: 24px; text-decoration: none; margin-right: 20px; transition: color 0.3s ease; }
+.back-button:hover { color: var(--text-color); }
+h1, h2 { font-weight: 600; }
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.2rem; margin-bottom: 20px; color: var(--text-color); }
+
+/* --- Левая панель: Карта --- */
+.account-panel { display:flex; flex-direction:column; gap:30px }
+.card-display-wrapper { perspective:1000px}
+.card-display { width:100%; height:180px; background-image:linear-gradient(45deg,rgba(252,163,17,0.1),rgba(30,30,30,0.5)),url('img/maxresdefault1.jpg'); background-size:cover; background-position:center; border-radius:var(--border-radius); padding:0; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end; position:relative; border:1px solid rgba(255,255,255,0.1); transition:transform 0.2s ease-out,filter 0.3s ease-out }
+.card-display.card-active { filter:drop-shadow(0px 15px 25px rgba(0,0,0,0.4)) }
+.card-info .card-name { font-weight:500; font-size:1rem; display:flex; align-items:center; gap:8px }
+.card-info .card-name .fa-pencil-alt { font-size:0.8rem; color:var(--text-muted); cursor:pointer }
+.card-info .card-number { font-size:0.9rem; color:var(--text-muted) }
+.card-balance { font-size:2.5rem; font-weight:700; color:#fff; text-shadow:0 0 10px rgba(252,163,17,0.5); padding:20px }
+.glass-container { position:absolute; top:5px; left:5px; display:inline-block; padding:12px 18px; background-color:rgba(0,0,0,0.3); backdrop-filter:blur(5px); border-radius:12px; border:1px transparent }
+.glass-container .card-name { color:#fff; font-weight:600 }
+.glass-container .card-number { color:rgba(255,255,255,0.8) }
+.glass-container .card-name .fa-pencil-alt { color:rgba(255,255,255,0.7) }
+.action-buttons { display: flex; flex-direction: column; gap: 10px; }
+.action-btn { width: 100%; padding: 15px; background-color: #2c2c2c; color: var(--text-muted); border: 1px solid transparent; border-radius: 10px; font-family: var(--font-family); font-size: 1rem; font-weight: 500; text-align: left; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 15px; }
+.action-btn i { width: 20px; text-align: center; }
+.action-btn:hover { background-color: #383838; color: var(--text-color); }
+
+/* --- Пагинация --- */
+.pagination { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 20px; color: var(--text-muted); }
+.page-btn { background: none; border: none; color: var(--text-muted); font-size: 1rem; cursor: pointer; padding: 5px 10px; transition: color 0.3s ease; }
+.page-btn:hover:not(:disabled) { color: var(--text-color); }
+.page-btn:disabled { color: #444; cursor: not-allowed; }
+
+/* --- Стили для новых элементов --- */
+.primary-action { background-color:var(--primary-color); color:var(--bg-color); font-weight:600; text-align:center; justify-content:center }
+.primary-action:hover { background-color:var(--primary-hover); color:var(--bg-color); transform:translateY(-2px); box-shadow:0 5px 15px rgba(252,163,17,0.2) }
+.panel-header { display:flex; align-items:center; gap:15px; margin-bottom:20px }
+.panel-header h2 { margin-right:auto; margin-bottom:0 }
+
+/* --- Стили для анимированного фильтра --- */
+.transaction-filters { position:relative; display:flex; flex-shrink:0; gap:5px; background-color:#2c2c2c; padding:5px; border-radius:10px; border:1px solid #333 }
+.active-indicator { position:absolute; top:5px; left:0; height:calc(100% - 10px); background-color:var(--primary-color); border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.3); transition:transform 0.4s cubic-bezier(0.65,0,0.35,1),width 0.4s cubic-bezier(0.65,0,0.35,1); z-index:0 }
+.filter-btn { position:relative; z-index:1; background-color:transparent; border:none; color:var(--text-muted); font-family:var(--font-family); padding:6px 14px; border-radius:8px; cursor:pointer; font-weight:500; transition:color 0.3s ease }
+.filter-btn:hover:not(.active) { color:var(--text-color) }
+.filter-btn.active { color:var(--bg-color); font-weight:600 }
+
+/* Сетка страницы */
+.bank-grid { display: grid; grid-template-columns: 1fr 320px 320px;  grid-template-rows: 1fr; gap: 30px; flex-grow: 1; padding: 0 25px 25px 25px; overflow: hidden; }
+
+/* --- Стили для шапки сайта --- */
+.site-header { display:flex; justify-content:space-between; align-items:center }
+.header-profile { display:flex; align-items:center; gap:10px; background-color:#2c2c2c; border:1px solid transparent; border-radius:12px; padding:8px 10px 8px 12px; cursor:pointer; transition:background-color 0.2s ease }
+.header-profile:hover { background-color:#383838 }
+.header-profile img { width:34px; height:34px }
+.profile-name { font-weight:600; font-size:1.1rem; color:var(--text-color) }
+.site-header { position:relative }
+.profile-dropdown { position:absolute; top:calc(100% - 10px); right:40px; width:260px; background-color:#252525; border:1px solid transparent; border-radius:var(--border-radius); box-shadow:0 10px 30px rgba(0,0,0,0.3); padding:12px; z-index:100; opacity:1; transform:translateY(0); transition:opacity 0.2s ease,transform 0.2s ease; pointer-events:auto }
+.profile-dropdown.hidden { opacity:0; transform:translateY(-10px); pointer-events:none }
+.dropdown-user-info { display:flex; align-items:center; gap:15px; padding:8px }
+.dropdown-user-info img { width:48px; height:48px }
+.user-info-name { font-size:1.1rem; font-weight:600; color:var(--text-color) }
+.dropdown-divider { border:none; border-top:1px solid #333; margin:10px 0 }
+.dropdown-menu { display:flex; flex-direction:column; gap:5px }
+.dropdown-item { display:flex; align-items:center; gap:15px; padding:12px; text-decoration:none; color:var(--text-muted); font-weight:500; border-radius:8px; transition:background-color 0.2s ease,color 0.2s ease }
+.dropdown-item:hover { background-color:#2c2c2c; color:var(--text-color) }
+.dropdown-item i { width:20px; font-size:1.1rem; text-align:center }
+.dropdown-item.danger-link:hover { background-color:rgba(211,47,47,0.1); color:var(--danger-color) }
+
+/* --- Левая колонка (основная) --- */
+.accounts-section {
+    display: flex;
+    flex-direction: column;
+    min-width: 0; 
+}
+
+.accounts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-shrink: 0;
+}
+
+.small-btn {
+    padding: 8px 16px; 
+    font-size: 0.9rem;
+    width: auto;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.accounts-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 276px);
+    gap: 20px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.account-card {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.account-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.card-bg-1 { 
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('img/maxresdefault1.jpg'); 
+}
+
+.card-bg-2 { 
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('img/example2.jpg');
+}
+
+.account-card .glass-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: inline-block;
+    padding: 12px 18px;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    border-radius: 12px;
+    border: 1px solid transparent;
+}
+
+
+.account-name {
+    font-weight: 600;
+    color: #fff;
+    font-size: 1.1rem;
+    display: block;
+}
+
+.account-number {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: monospace;
+    margin-top: 4px;
+}
+
+.account-card-balance {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 20px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.account-card-balance .currency-symbol {
+    font-size: 0.6em;
+}
+
+.input-with-counter {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    background-color: #2c2c2c;
+    border: 1px solid #383838;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.input-with-counter:focus-within {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(252, 163, 17, 0.3);
+}
+
+.input-with-counter .styled-input {
+    flex-grow: 1; 
+    width: 100%;
+    background: transparent; 
+    border: none; 
+    outline: none; 
+    padding: 12px 15px;
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: 1rem;
+}
+
+.input-with-counter #char-counter {
+    position: absolute; 
+    right: 15px;
+    top: 50%; 
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
+    pointer-events: none;
+}
+
+.input-with-counter #char-counter.limit-reached {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+/* --- Средняя колонка: Недавняя активность --- */
+.activity-section {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    border-left: 1px solid #333;
+    padding-left: 30px;
+}
+
+.activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.activity-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* --- Правая колонка (штрафы) --- */
+.fines-section {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #333;
+    padding-left: 30px;
+}
+
+.fines-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.fines-placeholder {
+    border: 2px dashed #333;
+    border-radius: var(--border-radius);
+    text-align: center;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-grow: 1;
+}
+
+.fines-placeholder i {
+    font-size: 2.5rem;
+}
+
+
+/* --- Общие стили для элементов транзакций в блоке активности --- */
+.transaction-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+}
+
+.transaction-item:first-child {
+    padding-top: 0;
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transaction-main-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.transaction-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+.transaction-icon-wrapper.icon-positive { background-color: rgba(76, 175, 80, 0.1); color: var(--success-color); }
+.transaction-icon-wrapper.icon-negative { background-color: rgba(211, 47, 47, 0.1); color: var(--danger-color); }
+.transaction-icon-wrapper.icon-transfer { background-color: #2c2c2c; color: var(--text-muted); }
+.transaction-icon-wrapper.icon-neutral { background-color: rgba(252, 163, 17, 0.1); color: var(--primary-color); }
+
+.transaction-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    line-height: 1.3;
+}
+
+.transaction-title { font-weight: 500; color: var(--text-color); }
+
+.account-badge {
+    display: inline-block;
+    background-color: #333;
+    color: var(--text-muted);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500; 
+    margin-left: 0; 
+    width: fit-content;
+    line-height: 1; 
+}
+
+.transaction-amount {
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.transaction-amount.positive { color: var(--success-color); }
+.transaction-amount.negative { color: var(--danger-color); }
+
+/* --- Стили для плавной фильтрации счетов --- */
+.account-card {
+    transition: all 0.3s ease, opacity 0.3s ease, max-height 0.4s ease, transform 0.3s ease, margin 0.4s ease, padding 0.4s ease;
+    overflow: hidden;
+}
+
+.account-card.hidden {
+    opacity: 0;
+    max-height: 0;
+    padding: 0;
+    margin-bottom: -20px;
+    border: none;
+    pointer-events: none;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: auto;
+    padding-top: 20px;
+    flex-shrink: 0; 
+}
+
+.page-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+    color: var(--text-color);
+}
+
+.page-btn:disabled {
+    color: #444;
+    cursor: not-allowed;
+}
+
+/* --- Стили для модального окна --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background-color: var(--surface-color);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    width: 100%;
+    max-width: 450px;
+    border: 1px solid transparent;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+    z-index: 1001; 
+}
+
+.modal-content.styled-modal {
+    border-top: 2px solid var(--primary-color);
+    padding: 25px;
+    max-width: 480px;
+}
+
+.modal-overlay.hidden .modal-content {
+    transform: scale(0.95);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.modal-header h2 {
+    margin-bottom: 0;
+    font-size: 1.3rem;
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s ease
+}
+
+.close-modal-btn:hover {
+    color: var(--text-color);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.styled-input {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #2c2c2c;
+    border: 1px solid #383838;
+    border-radius: 8px;
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.styled-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(252, 163, 17, 0.3);
+}
+
+/* Стили для уведомления внутри модального окна */
+.important-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background-color: rgba(252, 163, 17, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.important-notice i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+.important-notice p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    white-space:normal 
+}
+
+.important-notice strong { color:var(--text-color); font-weight:600 }
+
+.create-account-btn {
+    width: 100%;
+    justify-content: center;
+}
+.beta-badge {
+    background: linear-gradient(145deg, var(--primary-hover), var(--primary-color));
+    color: #1E1E1E; 
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 8px;
+    text-transform: uppercase;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 8px rgba(252, 163, 17, 0.4);
+    animation: pulse-glow 2.5s infinite ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 8px rgba(252, 163, 17, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 16px rgba(252, 163, 17, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 8px rgba(252, 163, 17, 0.4);
+    }
+}
