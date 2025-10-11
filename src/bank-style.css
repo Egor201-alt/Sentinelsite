@@ -35,49 +35,41 @@ body { background-color: var(--bg-color); color: var(--text-color); font-family:
     position: relative;
 }
 
-/* 
-   УДАЛИТЬ СТАРЫЙ СТИЛЬ:
-   .site-title { font-size: 1.5rem; text-shadow: 0 0 8px rgba(252,163,17,0.4); } 
-*/
-
-/* ДОБАВИТЬ НОВЫЕ СТИЛИ ВМЕСТО .site-title */
 .logo {
     display: flex;
     align-items: center;
     gap: 12px;
-    color: var(--color-text, #f0f0f0); /* Используем переменную или запасной цвет */
+    color: var(--color-text, #f0f0f0); 
     text-decoration: none;
     font-size: 1.5rem;
     font-weight: 700;
-    font-family: 'Montserrat', sans-serif; /* Важно добавить шрифт для консистентности */
+    font-family: 'Montserrat', sans-serif;
 }
 
 .logo img {
     height: 36px;
     border-radius: 8px;
 }
-/* --- КОНЕЦ БЛОКА ДЛЯ ЗАМЕНЫ --- */
+
 
 
 .header-profile { display:flex; align-items:center; gap:10px; background-color:#2c2c2c; border:1px solid transparent; border-bottom:1px solid #333; border-radius:12px; padding:8px 10px 8px 12px; cursor:pointer; transition:background-color 0.2s ease }
 .header-profile:hover { background-color:#383838 }
 .header-profile img { width:34px; height:34px }
 .profile-name { font-weight:600; font-size:1.1rem; color:var(--text-color) }
-/* --- Стили для правых элементов шапки --- */
 
-/* Новая обертка для кнопок справа */
 .header-right-panel {
     display: flex;
     align-items: center;
-    gap: 15px; /* Расстояние между кнопкой уведомлений и профилем */
+    gap: 15px; 
 }
 
-/* Стили для иконки-кнопки (уведомления) */
+
 .header-icon-btn {
     background-color: #2c2c2c;
     border: 1px solid transparent;
     color: var(--text-muted);
-    width: 48px;  /* Делаем ее квадратной и по высоте как плитка профиля */
+    width: 48px;  
     height: 48px;
     border-radius: 10px;
     font-size: 1.2rem;
@@ -128,7 +120,7 @@ h2 { font-size: 1.2rem; margin-bottom: 20px; color: var(--text-color); }
 /* --- Левая панель: Карта --- */
 .account-panel { display:flex; flex-direction:column; gap:30px }
 .card-display-wrapper { perspective:1000px}
-.card-display { width:100%; height:180px; background-image:linear-gradient(45deg,rgba(252,163,17,0.1),rgba(30,30,30,0.5)),url('img/maxresdefault1.jpg'); background-size:cover; background-position:center; border-radius:var(--border-radius); padding:0; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end; position:relative; border:1px solid rgba(255,255,255,0.1); transition:transform 0.2s ease-out,filter 0.3s ease-out }
+.card-display { width:100%; height:180px; background-image:linear-gradient(45deg,rgba(252,163,17,0.1),rgba(30,30,30,0.5)),url('assets/maxresdefault1.jpg'); background-size:cover; background-position:center; border-radius:var(--border-radius); padding:0; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end; position:relative; border:1px solid rgba(255,255,255,0.1); transition:transform 0.2s ease-out,filter 0.3s ease-out }
 .card-display.card-active { filter:drop-shadow(0px 15px 25px rgba(0,0,0,0.4)) }
 .card-info .card-name { font-weight:500; font-size:1rem; display:flex; align-items:center; gap:8px }
 .card-info .card-name .fa-pencil-alt { font-size:0.8rem; color:var(--text-muted); cursor:pointer }
@@ -238,11 +230,11 @@ h2 { font-size: 1.2rem; margin-bottom: 20px; color: var(--text-color); }
 }
 
 .card-bg-1 { 
-    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('img/maxresdefault1.jpg'); 
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/maxresdefault1.jpg'); 
 }
 
 .card-bg-2 { 
-    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('img/example2.jpg');
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/example2.jpg');
 }
 
 .account-card .glass-container {
